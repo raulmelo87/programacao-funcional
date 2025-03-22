@@ -80,3 +80,12 @@ def listar_tarefas_pendentes():
     
     return tarefas
 
+# Função de alta ordem para aplicar ações em massa 
+def aplicar_em_todas_tarefas(acao): 
+    global tarefas 
+    tarefas = [acao(tarefa) for tarefa in tarefas] 
+    
+# Exemplo de uso: marcar todas as tarefas como concluídas 
+def concluir_todas_tarefas(): 
+    aplicar_em_todas_tarefas(lambda tarefa: {**tarefa, "concluida": True})
+
