@@ -45,6 +45,36 @@ def remover_tarefa(id_tarefa):
     
     if tarefa_removida:
         print(f"Tarefa '{tarefa_removida['descricao']}' removida com sucesso.")
+
+    # Listar tarefas (ordenadas por prioridade usando lambda) 
+def listar_tarefas(): 
+ 
+    tarefas_ordenadas = sorted(tarefas, key=lambda t: t["prioridade"], 
+reverse=True) 
+    if tarefas_ordenadas: 
+        for tarefa in tarefas_ordenadas: 
+            status = "✔" if tarefa["concluida"] else " " 
+            print(f"{tarefa['id']}: [{status}] {tarefa['descricao']} 
+(Prioridade: {tarefa['prioridade']})") 
+    else: 
+        print('Lista de tarefas vazia.') 
+     
+    return tarefas_ordenadas 
+ 
+# Marcar uma tarefa como concluída 
+def concluir_tarefa(id_tarefa): 
+    for tarefa in tarefas: 
+        if tarefa["id"] == id_tarefa: 
+            tarefa["concluida"] = True 
+ 
+# Listar apenas tarefas pendentes usando list comprehension 
+def listar_tarefas_pendentes(): 
+    pendentes = [t for t in tarefas if not t["concluida"]] 
+    for tarefa in pendentes: 
+        print(f"{tarefa['id']}: {tarefa['descricao']} (Prioridade: 
+{tarefa['prioridade']})") 
+     
+    return pendentes 
     else:
         print(f"Nenhuma tarefa encontrada com o ID {id_tarefa}.")
     
